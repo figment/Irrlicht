@@ -34,13 +34,13 @@ public:
 	virtual IReadFile* createAndOpenFile(const io::path& filename) _IRR_OVERRIDE_;
 
 	//! Creates an IReadFile interface for accessing memory like a file.
-	virtual IReadFile* createMemoryReadFile(const void* memory, s32 len, const io::path& fileName, bool deleteMemoryWhenDropped = false) _IRR_OVERRIDE_;
+	virtual IReadFile* createMemoryReadFile(const void* memory, s32 len, const io::path& fileName, bool deleteMemoryWhenDropped = false, bool makeLocalCopy=false) _IRR_OVERRIDE_;
 
 	//! Creates an IReadFile interface for accessing files inside files
 	virtual IReadFile* createLimitReadFile(const io::path& fileName, IReadFile* alreadyOpenedFile, long pos, long areaSize) _IRR_OVERRIDE_;
 
 	//! Creates an IWriteFile interface for accessing memory like a file.
-	virtual IWriteFile* createMemoryWriteFile(void* memory, s32 len, const io::path& fileName, bool deleteMemoryWhenDropped=false) _IRR_OVERRIDE_;
+	virtual IWriteFile* createMemoryWriteFile(void* memory, s32 len, const io::path& fileName, bool deleteMemoryWhenDropped=false, bool makeLocalCopy=false) _IRR_OVERRIDE_;
 
 	//! Opens a file for write access.
 	virtual IWriteFile* createAndWriteFile(const io::path& filename, bool append=false) _IRR_OVERRIDE_;

@@ -10,9 +10,26 @@ namespace irr
 namespace io
 {
 
+//! copy routine to allow for local allocator to hold memory
+const void * dupe(const void *m, long len, bool clone) {
+	if (clone) {
+		c8* b = new c8[len];
+		if (m) memcpy(b, m, len);
+		return b;
+	}
+	return m;
+}
+void * dupe(void *m, long len, bool clone) {
+	if (clone) {
+		c8* b = new c8[len];
+		if (m) memcpy(b, m, len);
+		return b;
+	}
+	return m;
+}
 
-CMemoryReadFile::CMemoryReadFile(const void* memory, long len, const io::path& fileName, bool d)
-: Buffer(memory), Len(len), Pos(0), Filename(fileName), deleteMemoryWhenDropped(d)
+CMemoryReadFile::CMemoryReadFile(const void* memory, long len, const io::path& fileName, bool d, bool c)
+: Buffer(dupe(memory,len,c)), Len(len), Pos(0), Filename(fileName), deleteMemoryWhenDropped(d||c)
 {
 	#ifdef _DEBUG
 	setDebugName("CMemoryReadFile");
@@ -90,8 +107,8 @@ const io::path& CMemoryReadFile::getFileName() const
 }
 
 
-CMemoryWriteFile::CMemoryWriteFile(void* memory, long len, const io::path& fileName, bool d)
-: Buffer(memory), Len(len), Pos(0), Filename(fileName), deleteMemoryWhenDropped(d)
+CMemoryWriteFile::CMemoryWriteFile(void* memory, long len, const io::path& fileName, bool d, bool c)
+: Buffer(dupe(memory,len,c)), Len(len), Pos(0), Filename(fileName), deleteMemoryWhenDropped(d||c)
 {
 	#ifdef _DEBUG
 	setDebugName("CMemoryWriteFile");

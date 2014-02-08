@@ -23,7 +23,7 @@ namespace io
 	public:
 
 		//! Constructor
-		CMemoryReadFile(const void* memory, long len, const io::path& fileName, bool deleteMemoryWhenDropped);
+		CMemoryReadFile(const void* memory, long len, const io::path& fileName, bool deleteMemoryWhenDropped, bool makeLocalCopy = false);
 
 		//! Destructor
 		virtual ~CMemoryReadFile();
@@ -60,7 +60,7 @@ namespace io
 	public:
 
 		//! Constructor
-		CMemoryWriteFile(void* memory, long len, const io::path& fileName, bool deleteMemoryWhenDropped);
+		CMemoryWriteFile(void* memory, long len, const io::path& fileName, bool deleteMemoryWhenDropped, bool makeLocalCopy = false);
 
 		//! Destructor
 		virtual ~CMemoryWriteFile();
