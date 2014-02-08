@@ -219,7 +219,9 @@
 #  endif
 
 #  if defined(__GNUC__) || (defined(_MSC_VER) && (_MSC_VER >= 800))
-#    define PNGCAPI __cdecl
+#    ifndef PNGCAPI
+#      define PNGCAPI _cdecl
+#    endif
 #    if PNG_API_RULE == 1
        /* If this line results in an error __stdcall is not understood and
         * PNG_API_RULE should not have been set to '1'.

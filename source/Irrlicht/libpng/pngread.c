@@ -1176,7 +1176,7 @@ png_image_read_init(png_imagep image)
    if (image->opaque == NULL)
    {
       png_structp png_ptr = png_create_read_struct(PNG_LIBPNG_VER_STRING, image,
-          png_safe_error, png_safe_warning);
+          &png_safe_error, &png_safe_warning);
 
       /* And set the rest of the structure to NULL to ensure that the various
        * fields are consistent.
